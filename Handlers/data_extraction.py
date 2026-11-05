@@ -22,11 +22,8 @@ def get_data(date):
     try:
         url = f"https://api.tejhq.dev/v1/snapshot/nse?date={date}&format=json"
         response = requests.request("GET", url, timeout=60)
-        if response.status_code == 200:
-            data = response.json()
-            return data
-        else:
-            raise Exception(f"Failed to fetch data: {response.status_code}")
+        data = response.json()
+        return data
     except Exception as e:
         logger.error(f"Error in get_data: {str(e)}")
         raise e
