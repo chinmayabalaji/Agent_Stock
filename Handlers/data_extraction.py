@@ -5,7 +5,7 @@ import urllib3
 from datetime import datetime, timedelta
 
 logger = logging.getLogger()
-logger.basicConfig(level=logging.INFO)
+logger.setLevel(logging.INFO)
 
 s3 = boto3.client('s3')
 requests = urllib3.PoolManager()
