@@ -7,7 +7,7 @@ resource "aws_iam_role" "stock_role" {
                 Action = "sts:AssumeRole"
                 Effect = "Allow"
                 Principal = {
-                    Service = ["lambda.amazonaws.com"]
+                    Service = ["lambda.amazonaws.com", "redshift-serverless.amazonaws.com", "redshift.amazonaws.com"]
                 }
             },
         ]

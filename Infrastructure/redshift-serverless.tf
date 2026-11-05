@@ -4,9 +4,9 @@ resource "aws_redshiftserverless_namespace" "redshift_dw" {
   admin_username        = "admin"
   manage_admin_password = true
   iam_roles = [
-    aws_iam_role.stock_role
+    aws_iam_role.stock_role.arn
   ]
-  default_iam_role_arn = aws_iam_role.stock_role
+  default_iam_role_arn = aws_iam_role.stock_role.arn
 }
 
 resource "aws_redshiftserverless_workgroup" "redshift_dw" {
