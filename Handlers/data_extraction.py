@@ -20,7 +20,7 @@ def get_date():
 
 def get_data(date):
     try:
-        url = f"https://api.example.com/data?date={date}"
+        url = f"https://api.tejhq.dev/v1/snapshot/nse?date={date}&format=json"
         response = requests.request("GET", url, timeout=60)
         if response.status_code == 200:
             data = response.json()
