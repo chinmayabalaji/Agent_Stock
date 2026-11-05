@@ -1,13 +1,14 @@
 import json
 import boto3
 import logging
-import requests
+import urllib3
 from datetime import datetime, timedelta
-
-s3 = boto3.client('s3')
 
 logger = logging.getLogger()
 logger.basicConfig(level=logging.INFO)
+
+s3 = boto3.client('s3')
+requests = urllib3.PoolManager()
 
 def get_date():
     try:
@@ -32,7 +33,7 @@ def get_data(date):
 
 def write_data(data, date):
     try:
-        bucket_name = 'your-s3-bucket-name'
+        bucket_name = 'agent-stock-bucket'
         file_name = f"{date.strftime('%Y')}/{date.strftime('%m')}/{date.strftime('%d')}/data_{date}.json"
         s3.put_object(Bucket=bucket_name, Key=file_name, Body=json.dumps(data))
         logger.info(f"Data written to S3: {file_name}")
