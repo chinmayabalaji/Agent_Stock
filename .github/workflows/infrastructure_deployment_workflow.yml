@@ -30,6 +30,19 @@ jobs:
           role-to-assume: arn:aws:iam::317135987005:role/oidc-role
           aws-region: us-east-1
 
+          - name: Debug OIDC claims
+          uses: actions/github-script@v7
+          with:
+            script: |
+              const token = await core.getIDToken('sts.amazonaws.com');
+              const payload = JSON.parse(
+                Buffer.from(token.split('.')[1], 'base64url').toString()
+              );
+        
+              console.log('OIDC Subject:', payload.sub);
+              console.log('OIDC Audience:', payload.aud);
+              console.log('OIDC Issuer:', payload.iss);
+
       - name: Terraform Init
         run: terraform init
 
