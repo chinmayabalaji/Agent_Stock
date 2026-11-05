@@ -13,7 +13,7 @@ data "aws_subnets" "default" {
 }
 
 # Create a dedicated security group for Redshift
-resource "aws_security_group" "redshift-sg" {
+resource "aws_security_group" "redshift" {
   name        = "dw-redshift-sg"
   description = "Security group for Agent Stock Redshift Serverless Data warehouse"
   vpc_id      = data.aws_vpc.default.id
@@ -28,7 +28,7 @@ resource "aws_security_group" "redshift-sg" {
   }
 
   tags = {
-    Name    = "dw-redshift-sg"
+    Name = "dw-redshift-sg"
   }
 }
 
