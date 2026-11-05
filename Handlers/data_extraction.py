@@ -21,7 +21,7 @@ def get_date():
 def get_data(date):
     try:
         url = f"https://api.example.com/data?date={date}"
-        response = requests.get(url)
+        response = requests.request("GET", url, timeout=60)
         if response.status_code == 200:
             data = response.json()
             return data
