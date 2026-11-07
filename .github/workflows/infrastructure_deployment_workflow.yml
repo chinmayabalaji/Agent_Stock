@@ -39,8 +39,17 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
-      - name: Execute Redshift initialization SQL
-        shell: bash
+      - name: Get Redshift Details
         run: |
-          redshift_secret_arn=$(terraform output -raw redshift_admin_secret_arn)
-          rsql -D stock-data-warehouse -f Data_Warehouse/schemas.sql
+          echo "redshift_workgroup=$(terraform output -raw redshift_workgroup_name)" >> "$GITHUB_ENV"
+          echo "redshift_database=$(terraform output -raw redshift_database_name)" >> "$GITHUB_ENV"
+          echo "redshift_secret_arn=$(terraform output -raw redshift_admin_secret_arn)" >> "$GITHUB_ENV"
+
+      - name: Create Bronze Schema
+        run: |
+          aws redshift-data execute-statement \
+            --workgroup-name "$redshift_workgroup"
+            --database "$redshift_database"
+            --secret-arn "$redshift_secret_arn"
+            --sql "$(cat Data_Warehouse/bronze_schema.sql)"
+          
