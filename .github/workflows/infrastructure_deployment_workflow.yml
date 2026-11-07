@@ -43,7 +43,4 @@ jobs:
         shell: bash
         run: |
           redshift_secret_arn=$(terraform output -raw redshift_admin_secret_arn)
-
-          SQL=$(cat ../Data_Warehouse/init.sql)
-
-          rsql -D stock-data-warehouse -f Data_Warehouse\schemas.sql
+          rsql -D stock-data-warehouse -f Data_Warehouse/schemas.sql
