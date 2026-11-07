@@ -10,7 +10,7 @@ resource "aws_redshiftserverless_namespace" "redshift_dw" {
 }
 
 resource "aws_redshiftserverless_workgroup" "redshift_dw" {
-  workgroup_name      = "market-pulse"
+  workgroup_name      = "stock-data-warehouse"
   namespace_name      = aws_redshiftserverless_namespace.redshift_dw.namespace_name
   base_capacity       = 4
   publicly_accessible = false

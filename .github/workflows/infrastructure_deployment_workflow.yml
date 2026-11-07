@@ -38,3 +38,10 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+      - name: Data Warehouse Initialization
+        run: aws redshift-data execute-statement \
+                 --workgroup-name "stock-data-warehouse" \
+                 --database "stock-data-warehouse" \
+                 --secret-arn "arn:aws:secretsmanager:us-east-1:317135987005:secret:redshift!stock-data-warehouse-admin-JSDd0C"
+                 --sql "$(tr '\n' ' ' < C:\Users\CHINM\Agent_Stock\Data_Warehouse\init.sql)"
