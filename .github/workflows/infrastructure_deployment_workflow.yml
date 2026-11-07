@@ -46,7 +46,7 @@ jobs:
 
           SQL=$(cat ../Data_Warehouse/init.sql)
       
-          aws redshift-data execute-statement \
+          aws redshift-data batch-execute-statement \
             --workgroup-name "stock-data-warehouse" \
             --database "stock-data-warehouse" \
             --secret-arn "$redshift_secret_arn" \
