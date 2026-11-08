@@ -56,18 +56,18 @@ jobs:
             --workgroup-name "$redshift_workgroup" \
             --database "$redshift_database" \
             --secret-arn "$redshift_secret_arn" \
-            --sql "$(../cat Data_Warehouse/bronze_schema.sql)"
+            --sql "$(cat ../Data_Warehouse/bronze_schema.sql)"
 
           aws redshift-data execute-statement \
             --workgroup-name "$redshift_workgroup" \
             --database "$redshift_database" \
             --secret-arn "$redshift_secret_arn" \
-            --sql "$(../cat Data_Warehouse/silver_schema.sql)"
+            --sql "$(cat ../Data_Warehouse/silver_schema.sql)"
 
           aws redshift-data execute-statement \
             --workgroup-name "$redshift_workgroup" \
             --database "$redshift_database" \
             --secret-arn "$redshift_secret_arn" \
-            --sql "$(../cat Data_Warehouse/gold_schema.sql)"
+            --sql "$(cat ../Data_Warehouse/gold_schema.sql)"
           
           
