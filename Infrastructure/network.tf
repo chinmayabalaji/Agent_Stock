@@ -18,8 +18,6 @@ resource "aws_security_group" "redshift" {
   description = "Security group for Agent Stock Redshift Serverless Data warehouse"
   vpc_id      = data.aws_vpc.default.id
 
-  # No inbound access until a database client is configured.
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -30,6 +28,17 @@ resource "aws_security_group" "redshift" {
   tags = {
     Name = "dw-redshift-sg"
   }
+}
+
+resource "aws_security_group_rule" "redshift_ingress" {
+  type              = "ingress"
+  security_group_id = aws_security_group.redshift.id
+
+  from_port   = 5439
+  to_port     = 5439
+  protocol    = "tcp"
+  cidr_blocks = ["49.204.239.149/32"]
+  description = "Allow local dbt development"
 }
 
 output "default_vpc_id" {

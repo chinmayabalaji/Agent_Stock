@@ -13,7 +13,7 @@ resource "aws_redshiftserverless_workgroup" "redshift_dw" {
   workgroup_name      = "stock-data-warehouse"
   namespace_name      = aws_redshiftserverless_namespace.redshift_dw.namespace_name
   base_capacity       = 4
-  publicly_accessible = false
+  publicly_accessible = true
   port                = 5439
   subnet_ids          = data.aws_subnets.default.ids
   security_group_ids = [

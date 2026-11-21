@@ -1,1 +1,14 @@
 .terraform/
+
+# Python virtual environment and bytecode
+project/
+__pycache__/
+*.py[cod]
+
+# dbt generated files and local credentials
+target/
+dbt_packages/
+logs/
+.user.yml
+profiles.yml
+.env
